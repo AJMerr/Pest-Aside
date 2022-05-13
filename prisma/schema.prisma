@@ -12,7 +12,7 @@ datasource db {
 
 model Bug {
   id Int @id @default(autoincrement())
-  bugTitle String 
+  bugTitle String
   bugDescription String
   priority Int
   createdAt DateTime @default(now())
