@@ -15,8 +15,23 @@ bugsRouter.get("/api", async (_req, res) => {
     })
 })
 
+bugsRouter.get("/api/:id", async (req, res) => {
+    const { id } = req.params
+    await prisma.bug.findUnique({
+        where: {
+            id: Number(id)
+        }
+    })
+    .then((oneBug: any) => {
+        res.json(oneBug)
+    })
+    .catch((err) => {
+        console.error(err)
+    })
+})
+
 bugsRouter.post("/api/create", async (req, res) => {
-    const bug = await prisma.bug.create({
+    await prisma.bug.create({
         data: req.body
     })
     .then((newBug: object) => {
@@ -24,6 +39,23 @@ bugsRouter.post("/api/create", async (req, res) => {
     })
     .catch((err: Error) => {
         console.error(err)
+    })
+})
+
+bugsRouter.put("/api/edit/:id", async (req, res) => {
+    const { id } = req.params
+    await prisma.bug.update({
+        where: {
+            id: Number(id)
+        },
+        data: {
+            bugTitle: req.body,
+            bugDescription: req.body,
+            priority: req.body
+        }
+    })
+    .then((updatedBug) => {
+        res.json(updatedBug)
     })
 })
 
