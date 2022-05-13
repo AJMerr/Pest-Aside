@@ -53,6 +53,24 @@ bugsRouter.put("/api/edit/:id", async (req, res) => {
     .then((updatedBug) => {
         res.json(updatedBug)
     })
+    .catch((err) => {
+        console.error(err)
+    })
+})
+
+bugsRouter.delete("/api/:id", async (req, res) => {
+    const { id } = req.params
+    await prisma.bug.delete({
+        where: {
+            id: Number(id)
+        }
+    })
+    .then(() => {
+        return console.log("200 OKAY")
+    })
+    .catch((err) => {
+        console.error(err)
+    })
 })
 
 module.exports = {
