@@ -15,7 +15,7 @@ model Bug {
   bugTitle String 
   bugDescription String
   priority Int
-  createdAt DateTime
-  isInProgress Boolean
-  isComplete Boolean
+  createdAt DateTime @default(now())
+  isInProgress Boolean @default(false)
+  isComplete Boolean @default(false)
 }
