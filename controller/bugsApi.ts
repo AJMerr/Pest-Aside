@@ -1,17 +1,30 @@
+import { PrismaClient } from "@prisma/client"
 import express from "express" 
-
-const bugsApi = require("../model/bugs")
 
 const bugsRouter = express.Router()
 
+const prisma = new PrismaClient()
+
 bugsRouter.get("/api", async (_req, res) => {
-     await bugsApi.getAllBugs()
-     .then((allBugs: any) => {
-         res.json(allBugs)
-     })
-     .catch((err: any) => {
-         console.error(err)
-     })
+    return await prisma.bug.findMany()
+    .then((allBugs: object) => {
+        res.json(allBugs)
+    })
+    .catch((err: Error) => {
+        console.error(err)
+    })
+})
+
+bugsRouter.post("/api/create", async (req, res) => {
+    const bug = await prisma.bug.create({
+        data: req.body
+    })
+    .then((newBug: object) => {
+        res.json(newBug)
+    })
+    .catch((err: Error) => {
+        console.error(err)
+    })
 })
 
 module.exports = {
