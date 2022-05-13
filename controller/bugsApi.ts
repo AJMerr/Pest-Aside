@@ -48,11 +48,7 @@ bugsRouter.put("/api/edit/:id", async (req, res) => {
         where: {
             id: Number(id)
         },
-        data: {
-            bugTitle: req.body,
-            bugDescription: req.body,
-            priority: req.body
-        }
+        data: req.body
     })
     .then((updatedBug) => {
         res.json(updatedBug)
