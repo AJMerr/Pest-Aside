@@ -9,3 +9,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Bug {
+  id Int @id @default(autoincrement())
+  bugTitle String 
+  bugDescription String
+  priority Int
+  createdAt DateTime
+  isInProgress Boolean
+  isComplete Boolean
+}
