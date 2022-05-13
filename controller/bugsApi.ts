@@ -5,6 +5,7 @@ const bugsRouter = express.Router()
 
 const prisma = new PrismaClient()
 
+// Get all bugs
 bugsRouter.get("/api", async (_req, res) => {
     return await prisma.bug.findMany()
     .then((allBugs: object) => {
@@ -15,6 +16,7 @@ bugsRouter.get("/api", async (_req, res) => {
     })
 })
 
+// Get a bug
 bugsRouter.get("/api/:id", async (req, res) => {
     const { id } = req.params
     await prisma.bug.findUnique({
@@ -30,6 +32,7 @@ bugsRouter.get("/api/:id", async (req, res) => {
     })
 })
 
+// Create a new bug
 bugsRouter.post("/api/create", async (req, res) => {
     await prisma.bug.create({
         data: req.body
@@ -42,6 +45,7 @@ bugsRouter.post("/api/create", async (req, res) => {
     })
 })
 
+// Edit a bug
 bugsRouter.put("/api/edit/:id", async (req, res) => {
     const { id } = req.params
     await prisma.bug.update({
@@ -58,6 +62,7 @@ bugsRouter.put("/api/edit/:id", async (req, res) => {
     })
 })
 
+// Delete a bug
 bugsRouter.delete("/api/:id", async (req, res) => {
     const { id } = req.params
     await prisma.bug.delete({
