@@ -6,9 +6,15 @@ function AllBugs() {
     const [bugList, setBugList] = useState([]) 
 
     useEffect(() => {
-        axios.get("/api").then((res) => {
-            setBugList(res.data)
-        })
+        const fetchAllBugs = async () => {
+            try {
+                const res = await axios.get("/api")
+                setBugList(res.data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchAllBugs()
     }, [])
 
     return(
