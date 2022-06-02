@@ -21,15 +21,20 @@ function AllBugs() {
         <>
         <div> 
             {bugList.map((val, key) => {
-                return <div>
-                    <h2 className="text-4xl text-center">
-                        {val.bugTitle}
-                    </h2>
-                    <p className="text-center">
-                        {val.bugDescription}
-                    </p>
-                </div>
-            })}
+                return (
+                    <div className="grid grid-cols-2">
+                        <div className="flex items-center justify-center">
+                            <card className="flex flex-col rounded-lg shadow-md w-1/2 p-10 bg-white mt-4">
+                                <p className="text-center text-gray-800 text-4xl">
+                                    {val.bugTitle}
+                                </p>
+                                <p className="text-center text-gray-600 mt-2">
+                                    {val.bugDescription}
+                                </p>
+                            </card>
+                        </div>
+                    </div>
+            )})}
         </div>
         </>
     )
