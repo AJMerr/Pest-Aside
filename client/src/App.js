@@ -5,8 +5,8 @@ import Sidebar from "./Components/Sidebar";
 function App() {
   return (
     <div>
-      <AllBugs />
       <Sidebar />
+      <AllBugs />
     </div>
   );
 }
